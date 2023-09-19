@@ -1,6 +1,8 @@
 package com.devmountain.bookclubApp.dtos;
 
 
+import com.devmountain.bookclubApp.entities.Comment;
+import com.devmountain.bookclubApp.entities.Group;
 import com.devmountain.bookclubApp.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +20,8 @@ public class UserDto implements Serializable {
     private Long id;
     private String username;
     private String password;
-    private Set<BookDto> bookDtoSet = new HashSet<>();
+    private Set<GroupDto> groupDtoSet = new HashSet<>();
+    private Set<CommentDto> commentDtoSet = new HashSet<>();
 
     public UserDto(User user){
         if (user.getId() != null) {

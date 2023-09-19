@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,8 +28,13 @@ public class User {
     private String password;
 
     @ManyToMany
-    @JsonManagedReference
-    private GroupUser groupUser;
+    @JoinTable(name = "group_user", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "groups_id"))
+    private Set<Group> groups = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonManagedReference(value = "user_comment")
+    private Set<Comment> comments = new HashSet<>();
 
     public User(UserDto userDto){
         if (userDto.getUsername() != null) {

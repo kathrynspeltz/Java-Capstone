@@ -1,15 +1,16 @@
 package com.devmountain.bookclubApp.entities;
 
+import com.devmountain.bookclubApp.dtos.CommentDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+
 
 @Entity
-@Table(name = "Comments")
+@Table(name = "comments")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,22 +20,22 @@ public class Comment {
     private Long id;
 
     @Column(columnDefinition = "text")
-    private String bookName;
-
-    @Column(columnDefinition = "text")
     private String commentText;
 
     @ManyToOne
-    @JsonBackReference
+    @JoinColumn(name = "groups_id", referencedColumnName = "id")
+    @JsonBackReference(value = "groups_comment")
     private Group group;
 
     @ManyToOne
-    @JsonBackReference
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonBackReference(value = "user_comment")
     private User user;
 
-    public Comment(Comment commentDto) {
-        if(commentDto.getBody() != null){
-            this.body = commentDto.getBody();
+
+    public Comment(CommentDto commentDto) {
+        if(commentDto.getCommentText() != null){
+            this.commentText = commentDto.getCommentText();
         }
     }
 
