@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.awt.print.Book;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,14 +26,10 @@ public class User {
     @Column(unique = true)
     private String password;
 
-    @ManyToMany
-    @JoinTable(name = "group_user", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "groups_id"))
-    private Set<Group> groups = new HashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JsonManagedReference(value = "user_comment")
-    private Set<Comment> comments = new HashSet<>();
+    @JsonManagedReference(value = "user_book")
+    private Set<Book> books = new HashSet<>();
 
     public User(UserDto userDto){
         if (userDto.getUsername() != null) {

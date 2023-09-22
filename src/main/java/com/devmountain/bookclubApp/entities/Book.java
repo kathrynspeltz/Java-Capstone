@@ -2,12 +2,15 @@ package com.devmountain.bookclubApp.entities;
 
 import com.devmountain.bookclubApp.dtos.BookDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "books")
@@ -29,12 +32,16 @@ public class Book {
     private String genre;
 
     @Column(columnDefinition = "text")
-    private LocalDate readByDate;
+    private String readStatus;
 
     @ManyToOne
-    @JoinColumn(name = "group_id", referencedColumnName = "id")
-    @JsonBackReference(value = "groups_book")
-    private Group group;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonBackReference(value = "user_book")
+    private User user;
+
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonManagedReference(value = "book_comment")
+    private Set<Comment> comments = new HashSet<>();
 
 
     public Book(BookDto bookDto) {
@@ -46,6 +53,9 @@ public class Book {
         }
         if (bookDto.getGenre() != null){
             this.genre = bookDto.getGenre();
+        }
+        if (bookDto.getReadStatus() != null){
+            this.readStatus = bookDto.getReadStatus();
         }
     }
 

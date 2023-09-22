@@ -14,19 +14,19 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/group/{groupId}")
-    public List<BookDto> getBooksByGroup(@PathVariable Long groupId){
-        return bookService.getAllBooksByGroupId(groupId);
+    @GetMapping("/user/{userId}")
+    public List<BookDto> getAllBooksByUserId(@PathVariable Long userId){
+        return bookService.getAllBooksByUserId(userId);
     }
 
-    @GetMapping("/{groupId}")
+    @GetMapping("/{bookId}")
     public Optional<BookDto> getBookById(@PathVariable Long bookId){
         return bookService.getBookById(bookId);
     }
 
-    @PostMapping("/group/{groupId}")
-    public void addBook(@RequestBody BookDto bookDto,@PathVariable Long groupId){
-        bookService.addBook(bookDto, groupId);
+    @PostMapping("/user/{userId}")
+    public void addBook(@RequestBody BookDto bookDto,@PathVariable Long userId){
+        bookService.addBook(bookDto, userId);
     }
 
     @DeleteMapping("/{bookId}")

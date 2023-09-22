@@ -16,7 +16,7 @@ public interface BookService {
     @Transactional
     void updateBookById(BookDto bookDto);
 
-    List<BookDto> getAllBooksByGroupId(Long groupId);
+    List<BookDto> getAllBooksByUserId(Long userId);
 
     Optional<BookDto> getBookById(Long bookId);
 }

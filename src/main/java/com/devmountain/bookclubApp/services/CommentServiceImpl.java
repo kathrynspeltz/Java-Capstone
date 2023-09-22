@@ -1,11 +1,10 @@
 package com.devmountain.bookclubApp.services;
 
 import com.devmountain.bookclubApp.dtos.CommentDto;
+import com.devmountain.bookclubApp.entities.Book;
 import com.devmountain.bookclubApp.entities.Comment;
-import com.devmountain.bookclubApp.entities.Group;
+import com.devmountain.bookclubApp.repositories.BookRepository;
 import com.devmountain.bookclubApp.repositories.CommentRepository;
-import com.devmountain.bookclubApp.repositories.GroupRepository;
-import com.devmountain.bookclubApp.repositories.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,13 +19,13 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentRepository commentRepository;
     @Autowired
-    private GroupRepository groupRepository;
+    private BookRepository bookRepository;
 
     @Override
-    public List<CommentDto> getAllCommentsByGroupId(Long groupId){
-        Optional<Group> groupOptional = groupRepository.findById(groupId);
-        if (groupOptional.isPresent()){
-            List<Comment> commentList = commentRepository.findAllByGroupEquals(groupOptional.get());
+    public List<CommentDto> getAllCommentsByBookId(Long bookId){
+        Optional<Book> bookOptional = bookRepository.findById(bookId);
+        if (bookOptional.isPresent()){
+            List<Comment> commentList = commentRepository.findAllByBookEquals(bookOptional.get());
             return commentList.stream().map(comment -> new CommentDto(comment)).collect(Collectors.toList());
         }
         return Collections.emptyList();
@@ -34,10 +33,10 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public void addComment(CommentDto commentDto, Long groupId) {
-        Optional<Group> groupOptional = groupRepository.findById(groupId);
+    public void addComment(CommentDto commentDto, Long bookId) {
+        Optional<Book> bookOptional = bookRepository.findById(bookId);
         Comment comment = new Comment(commentDto);
-        groupOptional.ifPresent(comment::setGroup);
+        bookOptional.ifPresent(comment::setBook);
         commentRepository.saveAndFlush(comment);
     }
 

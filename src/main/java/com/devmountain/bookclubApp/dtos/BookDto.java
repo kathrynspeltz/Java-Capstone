@@ -18,8 +18,7 @@ public class BookDto implements Serializable{
     private String bookName;
     private String bookAuthor;
     private String genre;
-    private LocalDate readByDate;
-    private GroupDto groupDto;
+    private String readStatus;
 
     public BookDto(Book book){
         if (book.getId() != null){
@@ -33,6 +32,9 @@ public class BookDto implements Serializable{
         }
         if (book.getGenre() != null){
             this.genre = book.getGenre();
+        }
+        if (book.getReadStatus() != null){
+            this.genre = book.getReadStatus();
         }
     }
 }

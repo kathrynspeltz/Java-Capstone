@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class CommentDto implements Serializable {
     private Long id;
     private String commentText;
-    private GroupDto groupDto;
+    private BookDto bookDto;
     private UserDto userDto;
 
     public CommentDto(Comment comment) {

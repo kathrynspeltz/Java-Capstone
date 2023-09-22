@@ -23,14 +23,10 @@ public class Comment {
     private String commentText;
 
     @ManyToOne
-    @JoinColumn(name = "groups_id", referencedColumnName = "id")
-    @JsonBackReference(value = "groups_comment")
-    private Group group;
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    @JsonBackReference(value = "book_comment")
+    private Book book;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonBackReference(value = "user_comment")
-    private User user;
 
 
     public Comment(CommentDto commentDto) {

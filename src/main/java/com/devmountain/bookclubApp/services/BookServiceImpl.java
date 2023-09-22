@@ -2,15 +2,13 @@ package com.devmountain.bookclubApp.services;
 
 import com.devmountain.bookclubApp.dtos.BookDto;
 import com.devmountain.bookclubApp.entities.Book;
-import com.devmountain.bookclubApp.entities.Group;
+import com.devmountain.bookclubApp.entities.User;
 import com.devmountain.bookclubApp.repositories.BookRepository;
-import com.devmountain.bookclubApp.repositories.GroupRepository;
-import lombok.extern.java.Log;
+import com.devmountain.bookclubApp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -23,14 +21,14 @@ public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
 
     @Autowired
-    private GroupRepository groupRepository;
+    private UserRepository userRepository;
 
     @Override
     @Transactional
-    public void addBook(BookDto bookDto, Long groupId) {
-        Optional<Group> groupOptional = groupRepository.findById(groupId);
+    public void addBook(BookDto bookDto, Long userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
         Book book = new Book(bookDto);
-        groupOptional.ifPresent(book::setGroup);
+        userOptional.ifPresent(book::setUser);
         bookRepository.saveAndFlush(book);
     }
 
@@ -49,16 +47,16 @@ public class BookServiceImpl implements BookService {
             book.setGenre(bookDto.getGenre());
             book.setBookName(bookDto.getBookName());
             book.setBookAuthor(bookDto.getBookAuthor());
-            book.setReadByDate(bookDto.getReadByDate());
+            book.setReadStatus(bookDto.getReadStatus());
             bookRepository.saveAndFlush(book);
         });
     }
 
     @Override
-    public List<BookDto> getAllBooksByGroupId(Long groupId){
-        Optional<Group> groupOptional = groupRepository.findById(groupId);
-        if (groupOptional.isPresent()) {
-            List<Book> bookList = bookRepository.findAllByGroupEquals(groupOptional.get());
+    public List<BookDto> getAllBooksByUserId(Long userId){
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            List<Book> bookList = bookRepository.findAllByUserEquals(userOptional.get());
             return bookList.stream().map(book -> new BookDto(book)).collect(Collectors.toList());
         }
         return Collections.emptyList();

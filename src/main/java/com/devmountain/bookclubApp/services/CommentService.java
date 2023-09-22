@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CommentService {
-    List<CommentDto> getAllCommentsByGroupId(Long groupId);
+    List<CommentDto> getAllCommentsByBookId(Long bookId);
 
     @Transactional
-    void addComment(CommentDto commentDto, Long groupId);
+    void addComment(CommentDto commentDto, Long bookId);
 
     @Transactional
     void deleteCommentById(Long commentId);
