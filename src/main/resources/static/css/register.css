@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Laila:wght@300;500&family=Merriweather:wght@300;400;700&family=Special+Elite&display=swap');
+
+ul {
+    padding: 0;
+}
+
+* {
+font-family: 'Merriweather', serif;
+margin: 10px auto;
+}
+
+h1 {
+    font-family: 'Special Elite', cursive;
+    font-size: 65px;
+}
+.outline-box {
+	border-width: .5px;
+	border: solid;
+	border-color: black;
+	padding: 20px;
+}
+
+.one-line {
+    flex-direction: row;
+    display: flex;
+}
+
+.bookworm-header, .container-md {
+	flex-direction: row;
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 75%
+}
+
+input {
+	display: block;
+	background-color: white;
+	border-width: 1.5px;
+	width: 250px;
+	margin: 5px;
+	border-radius: 4px;
+}
+
+button {
+	background-color: #28778C;
+	color: white;
+	padding: 7px;
+	border-radius: 20px;
+	border: 0px;
+	margin: 0px auto;
+	display: block;
+	font-weight: 300;
+}
+
+button:active {
+	transform: scale(.80);
+}
