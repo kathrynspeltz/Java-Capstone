@@ -16,7 +16,7 @@
     <div class="bookworm-buddy">
         <h2>Welcome to</h2>
         <h1>Bookworm Buddy</h1>
-        <h2>Your helpful "book keeper"</h2>
+        <h2>your helpful <em>bookkeeper</em> app!</h2>
     </div>
     <div class="bookworm-image"><img src="https://media.istockphoto.com/id/1343803527/vector/bookworm-character-cartoon-on-stack-of-books-in-flat-design-on-white-background-i-love.jpg?s=612x612&w=0&k=20&c=Cz1TE5sfQylDBI7HCoLunGht5jsrG93x1-1hG6A5xuQ=" alt="worm on book"  height="350"></div>
 </div>
@@ -24,30 +24,31 @@
 <div class="container" id="home-container">
     <div id="book-form-container">
         <form id="book-form">
+            <header>Add a new book!</header>
             <div class="form-group">
                 <label for="bookName">Book Name</label>
-                <input type="text" class="form-control" id="bookName" placeholder="Book name">
+                <input type="text" name="bookName" id="bookName" placeholder="Book name"/>
             </div>
             <div class="form-group">
                 <label for="bookAuthor">Book Author</label>
-                <input type="text" class="form-control" id="bookAuthor" placeholder="Book author">
+                <input type="text" name="bookAuthor" id="bookAuthor" placeholder="Book author"/>
             </div>
             <div class="form-group">
                 <label for="genre">Book Genre</label>
                 <select name="genre" id="genre">
                     <option value="Fiction:Mystery/Thriller">Mystery/Thriller (Fiction)</option>
-                    <option value="Fiction:SciFi/Fantasy">Science Fiction (Fiction)</option>
+                    <option value="Fiction:SciFi/Fantasy">SciFi/Fantasy (Fiction)</option>
                     <option value="Fiction:Romance">Romance (Fiction)</option>
                     <option value="Fiction:Historical Fiction">Historical Fiction (Fiction)</option>
                     <option value="Fiction:Adventure">Adventure (Fiction)</option>
-                        <option value="Non-Fiction:Biography/Autobiography">Biography/Autobiography (Non-Fiction)</option>
-                        <option value="Non-Fiction:Self-Help/Motivational">Self-Help/Motivational (Non-Fiction)</option>
-                        <option value="Non-Fiction:History">History (Non-Fiction)</option>
-                        <option value="Non-Fiction:Science">Science (Non-Fiction)</option>
-                        <option value="Non-Fiction:True Crime">True Crime (Non-Fiction)</option>
-                        <option value="Non-Fiction:Cookbooks">Cookbooks (Non-Fiction)</option>
-                        <option value="Non-Fiction:Travel">Travel (Non-Fiction)</option>
-                        <option value="Non-Fiction:Other">Other (Non-Fiction)</option>
+                    <option value="Fiction:Other">Other (Fiction)</option>
+                    <option value="Non-Fiction:Biography/Autobiography">Biography/Autobiography (Non-Fiction)</option>
+                    <option value="Non-Fiction:Self-Help/Motivational">Self-Help/Motivational (Non-Fiction)</option>
+                    <option value="Non-Fiction:History/Science">History/Science (Non-Fiction)</option>
+                    <option value="Non-Fiction:Cookbooks">Cookbooks (Non-Fiction)</option>
+                    <option value="Non-Fiction:Travel">Travel (Non-Fiction)</option>
+                    <option value="Non-Fiction:Other">Other (Non-Fiction)</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="readStatus">Read Status</label>
@@ -58,9 +59,8 @@
             </div>
             <button id="submit-button" type="submit" class="btn btn-primary mt-1">Submit</button>
         </form>
-
-        <div id="book-container" class="container-fluid"></div>
     </div>
+    <div id="book-list-container" class="container-fluid"></div>
 </div>
 
 <div class="modal fade" id="book-edit-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="book-edit-modal-title" aria-hidden="true">

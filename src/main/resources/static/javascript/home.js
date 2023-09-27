@@ -1,13 +1,13 @@
 
-//Cookie
 const cookieArr = document.cookie.split("=")
 const userId = cookieArr[1];
+const bookAuthor = document.getElementById("bookAuthor")
 
-//DOM Elements
+
 const submitForm = document.getElementById("book-form")
-const bookContainer = document.getElementById("book-container")
+const bookListContainer = document.getElementById("book-list-container")
 
-//Modal Elements
+
 let bookBody = document.getElementById(`book-body`)
 let updateBookBtn = document.getElementById('update-book-button')
 
@@ -20,10 +20,16 @@ const baseUrl = "http://localhost:8080/api/v1/books/"
 const handleSubmit = async (e) => {
     e.preventDefault()
     let bodyObj = {
-        body: document.getElementById("book-input").value
+        bookName: document.getElementById("bookName").value,
+        bookAuthor: bookAuthor.value,
+        genre: document.getElementById("genre").value,
+        readStatus: document.getElementById("readStatus").value
     }
     await addBook(bodyObj);
-    document.getElementById("book-input").value = ''
+    document.getElementById("bookName").value = ''
+    bookAuthor.value = ''
+    document.getElementById("genre").value = ''
+    document.getElementById("readStatus").value = ''
 }
 
 async function addBook(obj) {
@@ -86,14 +92,17 @@ async function handleBookEdit(bookId){
 }
 
 const createBookCards = (array) => {
-    bookContainer.innerHTML = ''
+    bookListContainer.innerHTML = ''
     array.forEach(obj => {
         let bookCard = document.createElement("div")
         bookCard.classList.add("m-2")
         bookCard.innerHTML = `
-            <div class="card d-flex" style="width: 18rem; height: 18rem;">
-                <div class="card-body d-flex flex-column  justify-content-between" style="height: available">
-                    <p class="card-text">${obj.body}</p>
+            <div class="book-card">
+                <div class="card-body">
+                    <p class="card-text">Book: ${obj.bookName}</p>
+                    <p class="card-text">Author:${obj.bookAuthor}</p>
+                    <p class="card-text">Genre: ${obj.genre}</p>
+                    <p class="card-text">Status: ${obj.readStatus}</p>
                     <div class="d-flex justify-content-between">
                         <button class="btn btn-danger" onclick="handleDelete(${obj.id})">Delete</button>
                         <button onclick="getBookById(${obj.id})" type="button" class="btn btn-primary"
@@ -104,7 +113,7 @@ const createBookCards = (array) => {
                 </div>
             </div>
         `
-        bookContainer.append(bookCard);
+        bookListContainer.append(bookCard);
     })
 }
 function handleLogout(){
