@@ -34,7 +34,7 @@ public class BookDto implements Serializable{
             this.genre = book.getGenre();
         }
         if (book.getReadStatus() != null){
-            this.genre = book.getReadStatus();
+            this.readStatus = book.getReadStatus();
         }
     }
 }

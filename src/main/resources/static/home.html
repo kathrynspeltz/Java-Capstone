@@ -24,7 +24,7 @@
 <div class="container" id="home-container">
     <div id="book-form-container">
         <form id="book-form">
-            <header>Add a new book!</header>
+            <h4>Add a new book!</h4>
             <div class="form-group">
                 <label for="bookName">Book Name</label>
                 <input type="text" name="bookName" id="bookName" placeholder="Book name"/>
@@ -36,25 +36,25 @@
             <div class="form-group">
                 <label for="genre">Book Genre</label>
                 <select name="genre" id="genre">
-                    <option value="Fiction:Mystery/Thriller">Mystery/Thriller (Fiction)</option>
-                    <option value="Fiction:SciFi/Fantasy">SciFi/Fantasy (Fiction)</option>
-                    <option value="Fiction:Romance">Romance (Fiction)</option>
-                    <option value="Fiction:Historical Fiction">Historical Fiction (Fiction)</option>
-                    <option value="Fiction:Adventure">Adventure (Fiction)</option>
-                    <option value="Fiction:Other">Other (Fiction)</option>
-                    <option value="Non-Fiction:Biography/Autobiography">Biography/Autobiography (Non-Fiction)</option>
-                    <option value="Non-Fiction:Self-Help/Motivational">Self-Help/Motivational (Non-Fiction)</option>
-                    <option value="Non-Fiction:History/Science">History/Science (Non-Fiction)</option>
-                    <option value="Non-Fiction:Cookbooks">Cookbooks (Non-Fiction)</option>
-                    <option value="Non-Fiction:Travel">Travel (Non-Fiction)</option>
-                    <option value="Non-Fiction:Other">Other (Non-Fiction)</option>
+                    <option value="Fiction - Mystery/Thriller">Mystery/Thriller (Fiction)</option>
+                    <option value="Fiction - SciFi/Fantasy">SciFi/Fantasy (Fiction)</option>
+                    <option value="Fiction - Romance">Romance (Fiction)</option>
+                    <option value="Fiction - Historical Fiction">Historical Fiction (Fiction)</option>
+                    <option value="Fiction - Adventure">Adventure (Fiction)</option>
+                    <option value="Fiction - Other">Other (Fiction)</option>
+                    <option value="Non-Fiction - Biography/Autobiography">Biography/Autobiography (Non-Fiction)</option>
+                    <option value="Non-Fiction - Self-Help/Motivational">Self-Help/Motivational (Non-Fiction)</option>
+                    <option value="Non-Fiction - History/Science">History/Science (Non-Fiction)</option>
+                    <option value="Non-Fiction - Cookbooks">Cookbooks (Non-Fiction)</option>
+                    <option value="Non-Fiction - Travel">Travel (Non-Fiction)</option>
+                    <option value="Non-Fiction - Other">Other (Non-Fiction)</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="readStatus">Read Status</label>
                 <select name="readStatus" id="readStatus">
-                    <option value="read">Read</option>
-                    <option value="haventRead">Haven't read yet</option>
+                    <option value="Read">Read</option>
+                    <option value="Haven't Read">Haven't read yet</option>
                 </select>
             </div>
             <button id="submit-button" type="submit" class="btn btn-primary mt-1">Submit</button>
@@ -62,25 +62,48 @@
     </div>
     <div id="book-list-container" class="container-fluid"></div>
 </div>
-
-<div class="modal fade" id="book-edit-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="book-edit-modal-title" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="book-edit-modal-title">Edit your book</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="bg-modal">
+<div class="modal-content" id="book-edit-modal">
+    <form>
+        <h4>Edit your book</h4>
+            <div class="one-line">
+                <label for="updateBookName">Book Name</label>
+                <textarea class="form-control" rows="1" id="updateBookName"></textarea>
             </div>
-            <div class="modal-body d-flex">
-                <textarea class="form-control" rows="5" id="book-body"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" id="update-book-button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-            </div>
+        <div class="one-line">
+            <label for="updateBookAuthor">Book Author</label>
+            <textarea class="form-control" rows="1" id="updateBookAuthor"></textarea>
         </div>
-    </div>
+        <div class="one-line">
+            <label for="updateGenre">Book Genre</label>
+            <select name="genre" id="updateGenre">
+                <option value="Fiction - Mystery/Thriller">Mystery/Thriller (Fiction)</option>
+                <option value="Fiction - SciFi/Fantasy">SciFi/Fantasy (Fiction)</option>
+                <option value="Fiction - Romance">Romance (Fiction)</option>
+                <option value="Fiction - Historical Fiction">Historical Fiction (Fiction)</option>
+                <option value="Fiction - Adventure">Adventure (Fiction)</option>
+                <option value="Fiction - Other">Other (Fiction)</option>
+                <option value="Non-Fiction - Biography/Autobiography">Biography/Autobiography (Non-Fiction)</option>
+                <option value="Non-Fiction - Self-Help/Motivational">Self-Help/Motivational (Non-Fiction)</option>
+                <option value="Non-Fiction - History/Science">History/Science (Non-Fiction)</option>
+                <option value="Non-Fiction - Cookbooks">Cookbooks (Non-Fiction)</option>
+                <option value="Non-Fiction - Travel">Travel (Non-Fiction)</option>
+                <option value="Non-Fiction - Other">Other (Non-Fiction)</option>
+            </select>
+        </div>
+        <div class="one-line">
+            <label for="updateReadStatus">Read Status</label>
+            <select name="readStatus" id="updateReadStatus">
+                <option value="Read">Read</option>
+                <option value="Haven't Read">Haven't read yet</option>
+            </select>
+        </div>
+            <div class="modal-footer">
+                <button type="button" id="update-book-button">Save</button>
+            </div>
+    </form>
 </div>
-
+</div>
 <script src="./javascript/home.js" type="application/javascript"></script>
 </body>
 </html>

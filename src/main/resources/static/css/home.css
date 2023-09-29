@@ -28,6 +28,12 @@ h1 {
     border: solid;
     border-color: black;
 }
+#book-list-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
 .one-line {
     flex-direction: row;
     display: flex;
@@ -63,8 +69,32 @@ button:active {
 }
 .book-card {
     width: 18rem;
-    height: 18rem;
+    height: Auto;
     flex-direction: column;
     align-items: left;
-
+	border-width: .5px;
+	border: solid;
+	border-color: black;
+	padding: 10px;
+}
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 10;
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+    padding: 10px;
+}
+.bg-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    position: fixed;
+    top:0;
+    display: none;
 }

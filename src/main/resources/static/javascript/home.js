@@ -2,14 +2,15 @@
 const cookieArr = document.cookie.split("=")
 const userId = cookieArr[1];
 const bookAuthor = document.getElementById("bookAuthor")
-
-
+const updateBookName = document.getElementById("updateBookName")
+const updateBookAuthor = document.getElementById("updateBookAuthor")
+const updateGenre = document.getElementById("updateGenre")
+const updateReadStatus = document.getElementById("updateReadStatus")
 const submitForm = document.getElementById("book-form")
 const bookListContainer = document.getElementById("book-list-container")
-
-
-let bookBody = document.getElementById(`book-body`)
 let updateBookBtn = document.getElementById('update-book-button')
+const editButton = document.getElementsByClassName("edit-button")
+const closeModalButton = document.getElementsByClassName("close")
 
 const headers = {
     'Content-Type': 'application/json'
@@ -17,6 +18,13 @@ const headers = {
 
 const baseUrl = "http://localhost:8080/api/v1/books/"
 
+function openModal() {
+    document.querySelector(".bg-modal").style.display = "flex"
+}
+
+function closeModal() {
+    document.querySelector(".bg-modal").style.display = "none"
+}
 const handleSubmit = async (e) => {
     e.preventDefault()
     let bodyObj = {
@@ -78,7 +86,10 @@ async function getBookById(bookId){
 async function handleBookEdit(bookId){
     let bodyObj = {
         id: bookId,
-        body: bookBody.value
+        bookAuthor: updateBookAuthor.value,
+        bookName: updateBookName.value,
+        genre: updateGenre.value,
+        readStatus: updateReadStatus.value,
     }
 
     await fetch(baseUrl, {
@@ -103,10 +114,9 @@ const createBookCards = (array) => {
                     <p class="card-text">Author:${obj.bookAuthor}</p>
                     <p class="card-text">Genre: ${obj.genre}</p>
                     <p class="card-text">Status: ${obj.readStatus}</p>
-                    <div class="d-flex justify-content-between">
+                    <div class="one-line">
                         <button class="btn btn-danger" onclick="handleDelete(${obj.id})">Delete</button>
-                        <button onclick="getBookById(${obj.id})" type="button" class="btn btn-primary"
-                        data-bs-toggle="modal" data-bs-target="#book-edit-modal">
+                        <button onclick="getBookById(${obj.id}); openModal();" type="button">
                         Edit
                         </button>
                     </div>
@@ -124,16 +134,28 @@ function handleLogout(){
 }
 
 const populateModal = (obj) =>{
-    bookBody.innerText = ''
-    bookBody.innerText = obj.body
+
+    updateBookName.innerText = obj.bookName
+    updateBookAuthor.innerText = obj.bookAuthor
+    updateGenre.value = obj.genre
+    updateReadStatus.value = obj.readStatus
     updateBookBtn.setAttribute('data-book-id', obj.id)
 }
 
 getBooks(userId);
 
 submitForm.addEventListener("submit", handleSubmit)
-
+    updateBookName.innerText = ''
+    updateBookAuthor.innerText = ''
+    updateGenre.value = ''
+    updateReadStatus.value = ''
 updateBookBtn.addEventListener("click", (e)=>{
     let bookId = e.target.getAttribute('data-book-id')
     handleBookEdit(bookId);
+       updateBookName.innerText = '';
+       updateBookAuthor.innerText = '';
+       updateGenre.value = '';
+       updateReadStatus.value = '';
+       closeModal();
+
 })
