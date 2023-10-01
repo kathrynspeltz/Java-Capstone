@@ -6,24 +6,46 @@ const updateBookName = document.getElementById("updateBookName")
 const updateBookAuthor = document.getElementById("updateBookAuthor")
 const updateGenre = document.getElementById("updateGenre")
 const updateReadStatus = document.getElementById("updateReadStatus")
-const submitForm = document.getElementById("book-form")
+const submitBookForm = document.getElementById("submit-new-book-button")
+const addCommentButton = document.getElementById("add-comment-button")
 const bookListContainer = document.getElementById("book-list-container")
+const commentsContainer = document.getElementById("comments-container")
 let updateBookBtn = document.getElementById('update-book-button')
 const editButton = document.getElementsByClassName("edit-button")
 const closeModalButton = document.getElementsByClassName("close")
+const updateCommentId = document.getElementById("update-comment-id")
 
 const headers = {
     'Content-Type': 'application/json'
 }
 
 const baseUrl = "http://localhost:8080/api/v1/books/"
+const commentBaseUrl = "http://localhost:8080/api/v1/comments/"
 
 function openModal() {
     document.querySelector(".bg-modal").style.display = "flex"
 }
 
 function closeModal() {
-    document.querySelector(".bg-modal").style.display = "none"
+    document.querySelector(".bg-modal").style.display = "none";
+           updateBookName.value = '';
+           updateBookAuthor.value = '';
+           updateGenre.value = '';
+           updateReadStatus.value = '';
+}
+
+function openCommentModal() {
+    document.querySelector(".bg-modal-2").style.display = "flex"
+}
+
+function closeCommentModal() {
+    document.querySelector(".bg-modal-2").style.display = "none";
+    document.getElementById("add-book-comment").innerText = ''
+
+}
+
+function populateCommentModal(id){
+    addCommentButton.setAttribute('comment-book-id', id)
 }
 const handleSubmit = async (e) => {
     e.preventDefault()
@@ -33,13 +55,20 @@ const handleSubmit = async (e) => {
         genre: document.getElementById("genre").value,
         readStatus: document.getElementById("readStatus").value
     }
+    document.getElementById("bookName").value = ""
+    bookAuthor.value = ""
+    document.getElementById("genre").value = ""
+    document.getElementById("readStatus").value = ""
     await addBook(bodyObj);
-    document.getElementById("bookName").value = ''
-    bookAuthor.value = ''
-    document.getElementById("genre").value = ''
-    document.getElementById("readStatus").value = ''
 }
-
+const handleCommentAdd = async (e) => {
+    e.preventDefault()
+    let bodyObj = {
+       commentText: document.getElementById("add-book-comment").value,
+    }
+    document.getElementById("add-book-comment").value
+    await addComment(bodyObj);
+}
 async function addBook(obj) {
     const response = await
     fetch(`${baseUrl}user/${userId}`, {
@@ -53,6 +82,19 @@ async function addBook(obj) {
     }
 }
 
+async function addComment(obj) {
+    let commentBookId = addCommentButton.getAttribute('comment-book-id')
+    const response = await
+    fetch(`http://localhost:8080/api/v1/comments/book/${commentBookId}`, {
+        method: "POST",
+        body: JSON.stringify(obj),
+        headers: headers
+    })
+        .catch(err => console.error(err.message))
+    if (response.status == 200) {
+        return getComments(commentBookId);
+    }
+}
 async function getBooks(userId) {
     await fetch(`${baseUrl}user/${userId}`, {
         method: "GET",
@@ -71,6 +113,17 @@ async function handleDelete(bookId){
         .catch(err => console.error(err))
 
     return getBooks(userId);
+}
+
+async function handleCommentDelete(commentId){
+    let deleteCommentId = addCommentButton.getAttribute('comment-book-id')
+    await fetch(commentBaseUrl + commentId, {
+        method: "DELETE",
+        headers: headers
+    })
+        .catch(err => console.error(err))
+
+    return getComments(deleteCommentId);
 }
 
 async function getBookById(bookId){
@@ -115,10 +168,9 @@ const createBookCards = (array) => {
                     <p class="card-text">Genre: ${obj.genre}</p>
                     <p class="card-text">Status: ${obj.readStatus}</p>
                     <div class="one-line">
-                        <button class="btn btn-danger" onclick="handleDelete(${obj.id})">Delete</button>
-                        <button onclick="getBookById(${obj.id}); openModal();" type="button">
-                        Edit
-                        </button>
+                        <button class="blue-button" onclick="getBookById(${obj.id}); openModal();" type="button">Edit Book</button>
+                        <button class="red-button" onclick="handleDelete(${obj.id})">Delete</button>
+                        <button class="green-button" onclick="openCommentModal(); getComments(${obj.id}); populateCommentModal(${obj.id})" id="open-book-journal" type="button">Sticky Notes</button>
                     </div>
                 </div>
             </div>
@@ -126,6 +178,34 @@ const createBookCards = (array) => {
         bookListContainer.append(bookCard);
     })
 }
+
+async function getComments(bookId) {
+    await fetch(`${commentBaseUrl}book/${bookId}`, {
+        method: "GET",
+        headers: headers
+    })
+        .then(response => response.json())
+        .then(data => createCommentCards(data))
+        .catch(err => console.error(err))
+}
+
+const createCommentCards = (array) => {
+    commentsContainer.innerHTML = ''
+    array.forEach(obj => {
+        let commentCard = document.createElement("div")
+        commentCard.classList.add("m-2")
+        commentCard.innerHTML = `
+            <div class="comment-card">
+                <div class="card-body">
+                        <p>${obj.commentText}</p>
+                        <button class="red-button" onclick="handleCommentDelete(${obj.id})">Discard</button>
+                </div>
+            </div>
+        `
+        commentsContainer.append(commentCard);
+    })
+}
+
 function handleLogout(){
     let c = document.cookie.split(";");
     for(let i in c){
@@ -135,8 +215,8 @@ function handleLogout(){
 
 const populateModal = (obj) =>{
 
-    updateBookName.innerText = obj.bookName
-    updateBookAuthor.innerText = obj.bookAuthor
+    updateBookName.value = obj.bookName
+    updateBookAuthor.value = obj.bookAuthor
     updateGenre.value = obj.genre
     updateReadStatus.value = obj.readStatus
     updateBookBtn.setAttribute('data-book-id', obj.id)
@@ -144,18 +224,14 @@ const populateModal = (obj) =>{
 
 getBooks(userId);
 
-submitForm.addEventListener("submit", handleSubmit)
-    updateBookName.innerText = ''
-    updateBookAuthor.innerText = ''
-    updateGenre.value = ''
-    updateReadStatus.value = ''
+submitBookForm.addEventListener("click", handleSubmit)
+addCommentButton.addEventListener("click", handleCommentAdd)
+
+
 updateBookBtn.addEventListener("click", (e)=>{
     let bookId = e.target.getAttribute('data-book-id')
     handleBookEdit(bookId);
-       updateBookName.innerText = '';
-       updateBookAuthor.innerText = '';
-       updateGenre.value = '';
-       updateReadStatus.value = '';
        closeModal();
-
 })
+
+document.getElementById("exit-comment-button").addEventListener("click", closeCommentModal)

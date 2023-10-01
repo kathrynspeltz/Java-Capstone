@@ -57,7 +57,7 @@
                     <option value="Haven't Read">Haven't read yet</option>
                 </select>
             </div>
-            <button id="submit-button" type="submit" class="btn btn-primary mt-1">Submit</button>
+            <button id="submit-new-book-button">Submit</button>
         </form>
     </div>
     <div id="book-list-container" class="container-fluid"></div>
@@ -67,12 +67,12 @@
     <form>
         <h4>Edit your book</h4>
             <div class="one-line">
-                <label for="updateBookName">Book Name</label>
-                <textarea class="form-control" rows="1" id="updateBookName"></textarea>
+                <label for="updateBookName">Book Title</label>
+                <input type="text" name="updateBookName" id="updateBookName"/>
             </div>
         <div class="one-line">
             <label for="updateBookAuthor">Book Author</label>
-            <textarea class="form-control" rows="1" id="updateBookAuthor"></textarea>
+            <input type="text" name="updateBookAuthor" id="updateBookAuthor"/>
         </div>
         <div class="one-line">
             <label for="updateGenre">Book Genre</label>
@@ -103,6 +103,21 @@
             </div>
     </form>
 </div>
+</div>
+
+<div class="bg-modal-2">
+    <div class="modal-content" id="journal-edit-modal">
+        <form id="comments-form">
+        <h4></h4>
+        <div class="form-group">
+            <input type="text" name="add-book-comment" id="add-book-comment" placeholder="Add a comment"/>
+            <button type="button" id="add-comment-button">Add Comment</button>
+        </div>
+        </form>
+        <h5>Your Sticky Notes:</h5>
+        <div id="comments-container"></div>
+        <button class="red-button" id="exit-comment-button">Exit</button>
+    </div>
 </div>
 <script src="./javascript/home.js" type="application/javascript"></script>
 </body>

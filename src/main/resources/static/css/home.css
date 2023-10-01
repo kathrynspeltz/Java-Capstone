@@ -28,7 +28,7 @@ h1 {
     border: solid;
     border-color: black;
 }
-#book-list-container {
+#book-list-container, #comments-container {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -37,6 +37,7 @@ h1 {
 .one-line {
     flex-direction: row;
     display: flex;
+    text-align: left
 }
 .bookworm-header, .container-md {
 	flex-direction: row;
@@ -66,6 +67,13 @@ button {
 }
 button:active {
 	transform: scale(.80);
+}
+.green-button {
+	background-color: #ACCC4B;
+	color: black;
+}
+.red-button {
+    background-color: #D32666;
 }
 .book-card {
     width: 18rem;
@@ -97,4 +105,26 @@ button:active {
     position: fixed;
     top:0;
     display: none;
+}
+
+.bg-modal-2 {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    position: fixed;
+    top:0;
+    display: none;
+}
+
+.comment-card {
+    background-color: #EFC638;
+        width: 10rem;
+        min-height: 5rem;
+        height: Auto;
+        flex-direction: column;
+        border-top-color: #EBB808;
+        border-top: solid;
+        border-top-width:20px;
+    	padding: 5px;
+    	text-align: left;
 }
