@@ -8,12 +8,14 @@ const updateGenre = document.getElementById("updateGenre")
 const updateReadStatus = document.getElementById("updateReadStatus")
 const submitBookForm = document.getElementById("submit-new-book-button")
 const addCommentButton = document.getElementById("add-comment-button")
-const bookListContainer = document.getElementById("book-list-container")
+const readBookListContainer = document.getElementById("read-book-list-container")
+const unreadBookListContainer = document.getElementById("unread-book-list-container")
 const commentsContainer = document.getElementById("comments-container")
 let updateBookBtn = document.getElementById('update-book-button')
 const editButton = document.getElementsByClassName("edit-button")
 const closeModalButton = document.getElementsByClassName("close")
 const updateCommentId = document.getElementById("update-comment-id")
+const populateBookNameValue = document.getElementById("populate-book-name")
 
 const headers = {
     'Content-Type': 'application/json'
@@ -40,12 +42,14 @@ function openCommentModal() {
 
 function closeCommentModal() {
     document.querySelector(".bg-modal-2").style.display = "none";
-    document.getElementById("add-book-comment").innerText = ''
-
 }
 
-function populateCommentModal(id){
-    addCommentButton.setAttribute('comment-book-id', id)
+function populateCommentModal(obj){
+    addCommentButton.setAttribute('comment-book-id', obj);
+}
+
+function populateBookName(obj){
+    populateBookNameValue.innerHTML = bookName;
 }
 const handleSubmit = async (e) => {
     e.preventDefault()
@@ -66,7 +70,7 @@ const handleCommentAdd = async (e) => {
     let bodyObj = {
        commentText: document.getElementById("add-book-comment").value,
     }
-    document.getElementById("add-book-comment").value
+    document.getElementById("add-book-comment").value = ""
     await addComment(bodyObj);
 }
 async function addBook(obj) {
@@ -156,26 +160,31 @@ async function handleBookEdit(bookId){
 }
 
 const createBookCards = (array) => {
-    bookListContainer.innerHTML = ''
+    unreadBookListContainer.innerHTML = ''
+    readBookListContainer.innerHTML = ''
     array.forEach(obj => {
         let bookCard = document.createElement("div")
         bookCard.classList.add("m-2")
         bookCard.innerHTML = `
             <div class="book-card">
                 <div class="card-body">
-                    <p class="card-text">Book: ${obj.bookName}</p>
-                    <p class="card-text">Author:${obj.bookAuthor}</p>
+                    <p class="card-text">Title: ${obj.bookName}</p>
+                    <p class="card-text">Author: ${obj.bookAuthor}</p>
                     <p class="card-text">Genre: ${obj.genre}</p>
                     <p class="card-text">Status: ${obj.readStatus}</p>
                     <div class="one-line">
                         <button class="blue-button" onclick="getBookById(${obj.id}); openModal();" type="button">Edit Book</button>
                         <button class="red-button" onclick="handleDelete(${obj.id})">Delete</button>
-                        <button class="green-button" onclick="openCommentModal(); getComments(${obj.id}); populateCommentModal(${obj.id})" id="open-book-journal" type="button">Sticky Notes</button>
+                        <button class="green-button" onclick="openCommentModal(); getComments(${obj.id}); populateCommentModal(${obj.id});" id="open-book-journal" type="button">Sticky Notes</button>
                     </div>
                 </div>
             </div>
         `
-        bookListContainer.append(bookCard);
+        if (obj.readStatus == "Read"){
+                readBookListContainer.append(bookCard);
+        } else {
+            unreadBookListContainer.append(bookCard)
+        }
     })
 }
 
@@ -197,7 +206,7 @@ const createCommentCards = (array) => {
         commentCard.innerHTML = `
             <div class="comment-card">
                 <div class="card-body">
-                        <p>${obj.commentText}</p>
+                        <p class="handwriting">${obj.commentText}</p>
                         <button class="red-button" onclick="handleCommentDelete(${obj.id})">Discard</button>
                 </div>
             </div>

@@ -9,8 +9,7 @@
     <title>Home</title>
 </head>
 <body>
-
-<a class="btn btn-danger navbar-btn" href="login.html" onclick="handleLogout()">Logout</a>
+<div class="align-left"><a  href="login.html" onclick="handleLogout()">Logout</a></div>
 
 <div class="bookworm-header">
     <div class="bookworm-buddy">
@@ -20,37 +19,39 @@
     </div>
     <div class="bookworm-image"><img src="https://media.istockphoto.com/id/1343803527/vector/bookworm-character-cartoon-on-stack-of-books-in-flat-design-on-white-background-i-love.jpg?s=612x612&w=0&k=20&c=Cz1TE5sfQylDBI7HCoLunGht5jsrG93x1-1hG6A5xuQ=" alt="worm on book"  height="350"></div>
 </div>
-
+<h2 class="align-left">Your Reading List</h2>
+<div id="unread-book-list-container" class="container-fluid">Add books and notes to your reading list!</div>
 <div class="container" id="home-container">
+    <div id="form-line"><div class="book-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ9LD2ffSKoRFSCuioKnUZC6AL5eWjvE13KtIcNH5CaeXqHRph" alt="stack of books" height="100px"></div>
     <div id="book-form-container">
         <form id="book-form">
-            <h4>Add a new book!</h4>
-            <div class="form-group">
-                <label for="bookName">Book Name</label>
-                <input type="text" name="bookName" id="bookName" placeholder="Book name"/>
+            <h4>Add another book!</h4>
+            <div class="one-line">
+                <label for="bookName">Title</label>
+                <input type="text" name="bookName" id="bookName" placeholder="Book Title"/>
             </div>
-            <div class="form-group">
+            <div class="one-line">
                 <label for="bookAuthor">Book Author</label>
                 <input type="text" name="bookAuthor" id="bookAuthor" placeholder="Book author"/>
             </div>
-            <div class="form-group">
+            <div class="one-line">
                 <label for="genre">Book Genre</label>
                 <select name="genre" id="genre">
-                    <option value="Fiction - Mystery/Thriller">Mystery/Thriller (Fiction)</option>
-                    <option value="Fiction - SciFi/Fantasy">SciFi/Fantasy (Fiction)</option>
-                    <option value="Fiction - Romance">Romance (Fiction)</option>
-                    <option value="Fiction - Historical Fiction">Historical Fiction (Fiction)</option>
-                    <option value="Fiction - Adventure">Adventure (Fiction)</option>
-                    <option value="Fiction - Other">Other (Fiction)</option>
-                    <option value="Non-Fiction - Biography/Autobiography">Biography/Autobiography (Non-Fiction)</option>
-                    <option value="Non-Fiction - Self-Help/Motivational">Self-Help/Motivational (Non-Fiction)</option>
-                    <option value="Non-Fiction - History/Science">History/Science (Non-Fiction)</option>
-                    <option value="Non-Fiction - Cookbooks">Cookbooks (Non-Fiction)</option>
-                    <option value="Non-Fiction - Travel">Travel (Non-Fiction)</option>
-                    <option value="Non-Fiction - Other">Other (Non-Fiction)</option>
+                    <option value="Fiction - Adventure">Fiction - Adventure</option>
+                    <option value="Fiction - Historical Fiction">Fiction - Historical Fiction</option>
+                    <option value="Fiction - Mystery/Thriller">Fiction - Mystery/Thriller</option>
+                    <option value="Fiction - Romance">Fiction - Romance</option>
+                    <option value="Fiction - SciFi/Fantasy">Fiction - SciFi/Fantasy</option>
+                    <option value="Fiction - Other">Fiction - Other</option>
+                    <option value="Non-Fiction - Biography/Autobiography">Non-Fiction - Biography/Autobiography</option>
+                    <option value="Non-Fiction - Cookbooks">Non-Fiction - Cookbooks</option>
+                    <option value="Non-Fiction - History/Science">Non-Fiction - History/Science</option>
+                    <option value="Non-Fiction - Other">Non-Fiction - Other</option>
+                    <option value="Non-Fiction - Self-Help/Motivational">Non-Fiction - Self-Help/Motivational</option>
+                    <option value="Non-Fiction - Travel">Non-Fiction - Travel</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="one-line">
                 <label for="readStatus">Read Status</label>
                 <select name="readStatus" id="readStatus">
                     <option value="Read">Read</option>
@@ -60,7 +61,9 @@
             <button id="submit-new-book-button">Submit</button>
         </form>
     </div>
-    <div id="book-list-container" class="container-fluid"></div>
+    </div>
+    <h2 class="align-left">Past Books</h2>
+    <div id="read-book-list-container" class="container-fluid">Add books and notes to your read list!</div>
 </div>
 <div class="bg-modal">
 <div class="modal-content" id="book-edit-modal">
@@ -77,18 +80,18 @@
         <div class="one-line">
             <label for="updateGenre">Book Genre</label>
             <select name="genre" id="updateGenre">
-                <option value="Fiction - Mystery/Thriller">Mystery/Thriller (Fiction)</option>
-                <option value="Fiction - SciFi/Fantasy">SciFi/Fantasy (Fiction)</option>
-                <option value="Fiction - Romance">Romance (Fiction)</option>
-                <option value="Fiction - Historical Fiction">Historical Fiction (Fiction)</option>
-                <option value="Fiction - Adventure">Adventure (Fiction)</option>
-                <option value="Fiction - Other">Other (Fiction)</option>
-                <option value="Non-Fiction - Biography/Autobiography">Biography/Autobiography (Non-Fiction)</option>
-                <option value="Non-Fiction - Self-Help/Motivational">Self-Help/Motivational (Non-Fiction)</option>
-                <option value="Non-Fiction - History/Science">History/Science (Non-Fiction)</option>
-                <option value="Non-Fiction - Cookbooks">Cookbooks (Non-Fiction)</option>
-                <option value="Non-Fiction - Travel">Travel (Non-Fiction)</option>
-                <option value="Non-Fiction - Other">Other (Non-Fiction)</option>
+                <option value="Fiction - Adventure">Fiction - Adventure</option>
+                <option value="Fiction - Historical Fiction">Fiction - Historical Fiction</option>
+                <option value="Fiction - Mystery/Thriller">Fiction - Mystery/Thriller</option>
+                <option value="Fiction - Romance">Fiction - Romance</option>
+                <option value="Fiction - SciFi/Fantasy">Fiction - SciFi/Fantasy</option>
+                <option value="Fiction - Other">Fiction - Other</option>
+                <option value="Non-Fiction - Biography/Autobiography">Non-Fiction - Biography/Autobiography</option>
+                <option value="Non-Fiction - Cookbooks">Non-Fiction - Cookbooks</option>
+                <option value="Non-Fiction - History/Science">Non-Fiction - History/Science</option>
+                <option value="Non-Fiction - Other">Non-Fiction - Other</option>
+                <option value="Non-Fiction - Self-Help/Motivational">Non-Fiction - Self-Help/Motivational</option>
+                <option value="Non-Fiction - Travel">Non-Fiction - Travel</option>
             </select>
         </div>
         <div class="one-line">
@@ -107,18 +110,22 @@
 
 <div class="bg-modal-2">
     <div class="modal-content" id="journal-edit-modal">
+        <h4 id="populate-book-name">Romeo and Juliet</h4>
         <form id="comments-form">
-        <h4></h4>
-        <div class="form-group">
+        <div class="one-line">
             <input type="text" name="add-book-comment" id="add-book-comment" placeholder="Add a comment"/>
             <button type="button" id="add-comment-button">Add Comment</button>
         </div>
         </form>
         <h5>Your Sticky Notes:</h5>
         <div id="comments-container"></div>
-        <button class="red-button" id="exit-comment-button">Exit</button>
+        <button class="green-button" id="exit-comment-button">Exit</button>
     </div>
 </div>
+<div id="closing-line"><div><p> We love our local libraries! Check out our partner site, <a href="https://www.google.com/search?q=library+near+me">Google</a>, to find the closest one near you! </p>
+    <br>
+    <p id="goodbye">Happy Reading!</p></div>
+    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQVaTIvSqlh1dHYPl82YhgbgTar4L5r2241FxI8CK035u7IB6O-" alt="pile of books"  height="220px"></div>
 <script src="./javascript/home.js" type="application/javascript"></script>
 </body>
 </html>

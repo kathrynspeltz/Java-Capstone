@@ -7,6 +7,7 @@ ul {
 font-family: 'Merriweather', serif;
 margin: 10px auto;
 }
+
 h1 {
     font-family: 'Special Elite', cursive;
     font-size: 65px;
@@ -28,16 +29,39 @@ h1 {
     border: solid;
     border-color: black;
 }
-#book-list-container, #comments-container {
+#unread-book-list-container, #read-book-list-container, #comments-container, #form-line {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
 }
+#unread-book-list-container, #read-book-list-container {
+    width: 80%
+}
+#form-line {
+    width:60%;
+}
+#closing-line {
+        flex-direction: row;
+        display: flex;
+        text-align: center;
+        align-items: center;
+}
+#goodbye {
+      font-family: 'Special Elite', cursive;
+        font-size: 30px;
+}
 .one-line {
     flex-direction: row;
     display: flex;
-    text-align: left
+    text-align: center;
+    content-align: center;
+    margin: 10px;
+}
+.align-left {
+    text-align: left;
+    content-align: left;
+    width: 80%
 }
 .bookworm-header, .container-md {
 	flex-direction: row;
@@ -47,16 +71,21 @@ h1 {
 	justify-content: center;
 	width: 75%
 }
-input {
+input, select {
 	display: block;
 	background-color: white;
 	border-width: 1.5px;
 	width: 250px;
 	margin: 5px;
+	padding: 0px
 	border-radius: 4px;
 }
+
+select {
+	width: 257px;
+}
 button {
-	background-color: #28778C;
+	background-color: #13ACB5;
 	color: white;
 	padding: 7px;
 	border-radius: 20px;
@@ -87,8 +116,8 @@ button:active {
 }
 .modal-content {
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 45%;
+    left: 45%;
     transform: translate(-50%, -50%);
     border: 1px solid black;
     border-radius: 10px;
@@ -115,16 +144,22 @@ button:active {
     top:0;
     display: none;
 }
-
 .comment-card {
-    background-color: #EFC638;
-        width: 10rem;
-        min-height: 5rem;
+    background-color: #FCDE77;
+        width: 12rem;
+        min-height: 6rem;
         height: Auto;
         flex-direction: column;
-        border-top-color: #EBB808;
         border-top: solid;
-        border-top-width:20px;
-    	padding: 5px;
+        border-top-width:25px;
+        border-color: #FAD656;
+        border-top-color: #FAD656;
+    	padding: 1px 5px;
     	text-align: left;
 }
+
+.handwriting {
+    	font-family: 'Indie Flower', cursive;
+    	font-size: 18px;
+}
+
